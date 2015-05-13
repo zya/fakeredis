@@ -232,6 +232,7 @@ process.stdout.write('testing fakeredis ...\n\n');
 
     redis.ZADD("otherzset", 100, "whatever");
     redis.ZINTERSTORE("nothing", 2, "lexi", "otherzset", test("ZINTERSTORE empty out", null, 0));
+    redis.ZINTERSTORE("nothing", 2, "lexi", "myset", test("ZINTERSTORE type validation", null, 0));
     redis.TYPE("nothing", test("ZINTERSTORE empty out / TYPE", null, "none"));
 
 
@@ -976,7 +977,7 @@ function countTests() {
 }
 
 var NUM_TESTS = countTests();
-if (NUM_TESTS !== 272)
+if (NUM_TESTS !== 273)
     throw new Error("Test count is off: " + NUM_TESTS);
 
 process.on('exit', function () {
